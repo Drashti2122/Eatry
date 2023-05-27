@@ -1,0 +1,25 @@
+.box-size {
+  width: 93rem
+}
+
+.cards {
+  color: #001737;
+  margin-bottom: 1.625rem;
+  text-transform: capitalize;
+  font-family: "nunito-regular", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  padding-left: 3%;
+}
+
+.accordion-button:not(.collapsed) {
+  /* color: Black;
+  background-color: #e2e6eb; */
+  color: white !important;
+  background-color: #001737 !important;
+}
+
+.accordion-button[_ngcontent-rhy-c18]:not(.collapsed) {
+  color: white !important;
+  background-color: #001737 !important;
+}

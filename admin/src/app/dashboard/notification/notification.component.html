@@ -1,0 +1,28 @@
+<div class="col-md-12 pt-5">
+  <!-- <label class="cards pl-5">All Notifications</label> -->
+  <h3 class="page-title pl-5">All notifications</h3><br><br>
+</div>
+<div class="row pl-5" *ngFor="let notification of getAllNotification" style="padding-bottom:20px;width:109rem">
+  <div class="accordion" [attr.id]="'accordion-' + notification._id">
+    <div class="accordion-item">
+      <h2 class="accordion-header" [attr.id]="'accordionHeader-' + notification._id">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#accordionCollapse-' + notification._id"
+          [attr.aria-controls]="'accordionCollapse-' + notification._id">
+          {{notification?._id}}
+        </button>
+      </h2>
+      <div [attr.id]="'accordionCollapse-' + notification._id" class="accordion-collapse collapse"
+        [attr.aria-labelledby]="'accordionHeader-' + notification._id"
+        *ngFor="let subNotification of notification.notifications"
+        (click)="delNotification(subNotification.notificationId)" class="accordion-collapse collapse show"
+        style="padding:10px;border-radius: 10%;">
+        <div class="accordion-body" style="background-color:rgb(139 130 130 / 10%);"
+          *ngFor="let items of subNotification.item">
+          <span>{{items?.itemName}}</span>
+          <span>&nbsp;&nbsp;&nbsp;{{subNotification?.quantity}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width:108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Manage SubCategory</h3>
+    </div>
+    <div class="row">
+
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add SubCategory</h4>
+            <form [formGroup]="subCategoryForm" (ngSubmit)="onsubCategory()">
+              <!-- <form> -->
+              <div class="form-group col-xs-12">
+                <!-- <label for="exampleInputName1">subCategory Name</label> -->
+
+                <input type="text" class="form-control" placeholder="Enter SubCategory Name"
+                  formControlName="subCategoryName"
+                  [ngClass]="{'is-invalid': subCategoryName && subCategoryName.invalid && subCategoryName.touched}">
+                <div *ngIf="subCategoryName && subCategoryName.invalid && subCategoryName.touched">
+                  <div class="text-danger text-start" *ngIf="subCategoryName?.errors?.['required']">*SubCategory Name is
+                    required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelectGender">Select Category</label>
+                <select class="form-control" id="exampleSelectGender" formControlName="categoryName" required>
+                  <option selected disabled value="selectCategory">Select Category</option>
+                  <option *ngFor="let cat of getAllCategory" value={{cat._id}}>
+                    {{cat.categoryName}}</option>
+                </select>
+                <div *ngIf="categoryName && categoryName.invalid && categoryName.touched">
+                  <div class="text-danger text-start" *ngIf="categoryName?.errors?.['required']">*Category Name is
+                    required
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-color mr-2">{{editState?'Edit':'Add'}}</button>
+              <!-- <button class="btn btn-light">Cancel</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Get Category</h4>
+            <div class="row start-end" style="display:flex">
+              <div class="col-md-5"></div>
+              <div class="col-md-6">
+                <input id="searchInputSubCategory" type="text" class="form-control" placeholder="Search"
+                  [(ngModel)]="filterObj.searchName">
+              </div>
+              <div class="col-md-1">
+                <select class="form-control" id="searchPageSubCategory" [(ngModel)]="filterObj.pageSize">
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div><br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>SubCategory Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Category Name</h6>
+                    </b></th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="let subcategory of getAllSubCategory | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                <tr>
+                  <td>{{ subcategory.subCategoryName }}</td>
+                  <td>{{ subcategory.categoryId[0]?.categoryName}}</td>
+                  <td><a (click)="onEditSubCategory(subcategory._id)"><i class="mdi mdi-pencil menu-icon fs-4"></i></a>
+                  </td>
+                  <td><a (click)="onDelSubCategory(subcategory._id)"><i
+                        class="mdi mdi-close-circle menu-icon fs-4"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

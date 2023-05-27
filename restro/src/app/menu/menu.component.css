@@ -1,0 +1,21 @@
+.order-hover:hover {
+    color: white !important;
+    background-color: #94b800 !important;
+    ;
+}
+
+.order-hover {
+    background-color: white !important;
+}
+
+/* .filled i {
+    color: #9c1006
+}
+
+.lcolor {
+    color: black;
+} */
+
+.like-container.filled i {
+    color: #9c1006;
+}

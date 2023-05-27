@@ -1,0 +1,136 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width: 108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Manage Item</h3>
+    </div>
+    <div class="row">
+
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add Item</h4>
+            <form [formGroup]="itemForm" (ngSubmit)="onItem()" enctype="multipart/form-data">
+              <!-- <form> -->
+              <div class="form-group col-xs-12">
+                <!-- <label for="exampleInputName1">subCategory Name</label> -->
+                <input type="text" class="form-control" placeholder="Enter Item Name" formControlName="itemName"
+                  required [ngClass]="{'is-invalid': itemName && itemName.invalid && itemName.touched}">
+                <div *ngIf="itemName && itemName.invalid && itemName.touched">
+                  <div class="text-danger text-start" *ngIf="itemName?.errors?.['required']">*Item Name is
+                    required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12">
+                <!-- <label for="exampleInputName1">subCategory Name</label> -->
+                <input type="number" class="form-control" placeholder="Enter Price" formControlName="itemPrice" required
+                  [ngClass]="{'is-invalid': itemPrice && itemPrice.invalid && itemPrice.touched}">
+                <div *ngIf="itemPrice && itemPrice.invalid && itemPrice.touched">
+                  <div class="text-danger text-start" *ngIf="itemName?.errors?.['required']">*Item Price is
+                    required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12">
+                <div *ngIf="editItem">
+                  <img src={{editItem.itemPicture}} style="height:100px;width:100px">
+                </div><br>
+
+                <input type="file" class="form-control" placeholder="Select File" formControlName="itemPicture"
+                  (change)="onChange($event)" required
+                  [ngClass]="{'is-invalid': itemPicture && itemPicture.invalid && itemPicture.touched}">
+                <div *ngIf="itemPicture && itemPicture.invalid && itemPicture.touched">
+                  <div class="text-danger text-start" *ngIf="itemPicture?.errors?.['required']">*Item Picture is
+                    required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <select class="form-control" id="exampleSelectGender" formControlName="subCategoryName" required>
+                  <option selected disabled value="selectSubCategory">Selected SubCategory</option>
+                  <option *ngFor="let subCat of getAllSubCategory" value={{subCat._id}}>{{subCat.subCategoryName}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control" id="exampleSelectFoodType" formControlName="foodType" required>
+                  <option selected disabled value="selectFoodType">Select FoodType</option>
+                  <option value="Veg">Veg</option>
+                  <option value="nonVeg">nonVeg</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-color mr-2">{{editState?'Edit':'Add'}}</button>
+              <!-- <button type="submit" class="btn btn-primary mr-2" *ngIf=!editState value="Add">Add</button> -->
+              <!-- <button type="submit" class="btn btn-primary mr-2" *ngIf=editState value="Edit">Edit</button> -->
+              <!-- <button class="btn btn-light">Cancel</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Get Item</h4>
+            <div class="row start-end" style="display:flex">
+              <div class="col-md-5"></div>
+              <div class="col-md-6">
+                <input id="searchInputItem" type="text" class="form-control" placeholder="Search"
+                  [(ngModel)]="filterObj.searchName">
+              </div>
+              <div class="col-md-1">
+                <select class="form-control" id="searchPageItem" [(ngModel)]="filterObj.pageSize">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div><br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>Item Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Item Price</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Item Picture</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Item Subcategory</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Edit</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Delete</h6>
+                    </b></th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="let item of getItem | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                <tr>
+                  <td>{{item.itemName}}</td>
+                  <td>{{item.itemPrice}}</td>
+                  <td><img src={{item.itemPicture}} style="height:100px;width:100px"></td>
+                  <td>{{item.subCategoryId[0].subCategoryName}}</td>
+                  <td><a (click)="onEditItem(item._id)"><i class="mdi mdi-pencil menu-icon fs-4"></i></a></td>
+                  <td><a (click)="onDeleteItem(item._id)"><i class="mdi mdi-close-circle menu-icon fs-4"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

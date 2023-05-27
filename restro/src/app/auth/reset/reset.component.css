@@ -1,0 +1,14 @@
+/* [type=submit]:not(:disabled),
+button:not(:disabled) :hover{
+  cursor: pointer;
+  color: #94b800 !important;
+  border-color: #94b800 !important;
+} */
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+  color: #94b800 !important;
+  border-color: #747171 !important;
+}

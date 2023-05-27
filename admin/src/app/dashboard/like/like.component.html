@@ -1,0 +1,53 @@
+<div class="main-panel">
+    <div class="content-wrapper" style="background-color :white;width:108rem;">
+        <div class="page-header">
+            <h3 class="page-title">Likes</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Likes</h4>
+                        <div class="row start-end" style="display:flex">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-6">
+                                <input id="searchInputLikes" type="text" class="form-control" placeholder="Search"
+                                    [(ngModel)]="filterObj.searchName">
+                            </div>
+                            <div class="col-md-1">
+                                <select class="form-control" id="searchPageLikes" [(ngModel)]="filterObj.pageSize">
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <table class="table" id="example">
+                            <thead>
+                                <tr>
+                                    <th><b>
+                                            <h6>Item Name</h6>
+                                        </b></th>
+                                    <th><b>
+                                            <h6>Count</h6>
+                                        </b></th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                *ngFor="let like of getAllLikes | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                                <tr>
+                                    <td>{{like.itemName}}</td>
+                                    <td>{{like.count}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="onPageChange($event)"
+                            class="pagination"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

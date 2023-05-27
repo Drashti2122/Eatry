@@ -1,0 +1,43 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width:108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Daily Reports</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <!-- <h4 class="card-title">Daily Reports</h4> -->
+            <h4 class="page-title" style="display:flex">
+              <div class="col-md-6"></div>
+              <div class="col-md-5" style="display:flex">
+                <input type="number" min="1" class="form-control" placeholder="top most" [(ngModel)]="defaultValue"
+                  (ngModelChange)="onNumberChange($event)" />
+              </div>
+            </h4>
+            <br>
+            <table class="table" id="example">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>Item Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Total</h6>
+                    </b></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let getTopMost of getTopMost | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tr>
+                  <td>{{getTopMost.itemName}}</td>
+                  <td>{{getTopMost.count}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="login-box">
+
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="user-box">
+      <input type="email" name="email" formControlName="loginEmail" required>
+      <span *ngIf="loginEmail && loginEmail.invalid && loginEmail.touched">
+        <div class="text-light text-end" *ngIf="loginEmail?.errors?.['required']">*Email is required</div>
+      </span>
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="password" formControlName="loginPassword" required>
+      <label>Password</label>
+      <span *ngIf="loginPassword && loginPassword.invalid && loginPassword.touched">
+        <div class="text-light text-end" *ngIf="loginPassword?.errors?.['required']">*Password is required</div>
+      </span>
+      <br>
+      <a style="font-size:15px;color:white;margin-left:62%;" routerLink="forgotPassword">forgot password?</a>
+    </div>
+    <p>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <button type="submit" [disabled]="loginForm.invalid" class="login_btn"
+        [disabled]="loginForm.invalid">Submit</button>
+    </p>
+  </form>
+</div>

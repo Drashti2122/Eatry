@@ -1,0 +1,144 @@
+<section class="make-reservation pd-tb-90 bg-nero" style="padding-top:10%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center full-content">
+                <h3 class="sub-section-title color-citrus">Always happy to see you</h3>
+                <h2 class="section-title no-border color-white">Make A Reservation</h2>
+                <p class="text-light">Our booking hours are from 10:00 AM to 10:00 PM</p>
+                <p class="text-light">Only <i class="fa fa-inr text-light" style="font-size:10px"
+                        aria-hidden="true"></i>100 charges for table
+                    booking</p>
+                <br>
+                <div class="resturent-title-border dark-border">
+                    <i class="lit lit-restaurent-knife"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="reservationForm" (ngSubmit)="onReservation()" class="reservation-form citrus-theme">
+                    <div class=" row">
+                        <div class="col-md-3">
+                            <!-- <i class="fa fa-calendar"></i> -->
+                            <!-- <input type="date" class="form-contol" formControlName="reserveDate" placeholder="Date"
+                                required min="2023-05-05" max="2023-05-15" /> -->
+                            <!-- <input type="date" class="form-control input-design" formControlName="reserveDate"
+                                placeholder="Date" [min]="minDate" [max]="maxDate" required
+                                style="background-color:white;padding:0 6px 0 6px;" /> -->
+                            <input type="date" [min]="minDate" [max]="maxDate" class="form-contol input-design"
+                                formControlName="reserveDate" placeholder="Date" required />
+                            <span *ngIf="reserveDate && reserveDate.invalid && reserveDate.touched" class="text-end">
+                                <span class="text-light text-end text font-weight-bold  px-4"
+                                    *ngIf="reserveDate?.errors?.['required']">*Date is required</span>
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- <i class="fa fa-clock-o"></i> -->
+                            <input type="time" step="360" class="form-contol input-design"
+                                formControlName="reserveInTime" placeholder="In Time" required />
+                            <span *ngIf="reserveInTime && reserveInTime.invalid && reserveInTime.touched"
+                                class="text-end">
+                                <span class="text-light text-end text font-weight-bold  px-4"
+                                    *ngIf="reserveInTime?.errors?.['required']">*Intime is required</span>
+                            </span>
+                            <span class="text-light text-center font-weight-bold"
+                                *ngIf="reserveInTime?.errors?.['pattern']">*Enter valid
+                                time</span>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- <i class="fa fa-clock-o"></i> -->
+                            <input type="time" class="form-contol input-design" formControlName="reserveOutTime"
+                                placeholder="Out Time" />
+                            <span *ngIf="reserveOutTime && reserveOutTime.invalid && reserveOutTime.touched"
+                                class="text-end">
+                                <span class="text-light text-end text font-weight-bold  px-4"
+                                    *ngIf="reserveOutTime?.errors?.['required']">*OutTime is required</span>
+                            </span>
+                            <span class="text-light text-center font-weight-bold"
+                                *ngIf="reserveOutTime?.errors?.['pattern']">*Enter
+                                valid
+                                time</span>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- <i class="fa fa-phone-square"></i> -->
+                            <input type="number" class="form-contol input-design" formControlName="reserveCNo"
+                                placeholder="Phone Number" />
+                            <span *ngIf="reserveCNo && reserveCNo.invalid && reserveCNo.touched" class="text-end">
+                                <span class="text-light text-end text font-weight-bold  px-4"
+                                    *ngIf="reserveCNo?.errors?.['required']">*Date is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <p class="text-center">or if you have any query,call us to reserve your table to experience
+                                your
+                                best dining experience ever.</p>
+                            <h2 class="color-white">Contact Us: 8506378045</h2>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="reservation-btn">Book
+                                Table</button>
+                        </div>
+                        <div class="col-12 mrt-30">
+                            <p class="input-success alert alert-success">We have received your mail, We will get
+                                back to you soon!</p>
+                            <p class="input-error alert alert-danger">Sorry, Message could not send! Please try
+                                again.</p>
+                        </div>
+                    </div>
+                </form>
+                <div class="row text-center">
+                    <!-- <div class="row text-center" *ngIf="reserve==true"> -->
+                    <div class="col-12">
+                        <p class="text-light font-weight-bold h5">Show Book Table
+                            Reservation</p>
+                        <table class="table table-striped text-light"
+                            style="background-image: url(assets/images/restaurant/newletter-pattern.jpg);color: #636363 !important;text-align: justify !important;border-radius: 6px;">
+                            <thead>
+                                <tr>
+                                    <th>Reservation Date</th>
+                                    <th>TableNo</th>
+                                    <th>InTime</th>
+                                    <th>OutTime</th>
+                                    <th>Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let reservation of upcomingReservations">
+                                <tr>
+                                    <td>{{reservation.bookingDate}}</td>
+                                    <td>{{ reservation.tableId.tableNo}}</td>
+                                    <td>{{ reservation.bookingInTime }}</td>
+                                    <td>{{ reservation.bookingOutTime }}</td>
+
+                                    <td><span class="badge badge-danger"
+                                            (click)="onRefund(reservation._id)">cancel</span>(50%
+                                        refund)
+                                        <!-- <i class="fa fa-times-circle" aria-hidden="true"
+                                            (click)="onRefund(user._id)"></i> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngFor="let reservation of otherReservations">
+                                <tr>
+                                    <td>{{reservation.bookingDate}}</td>
+                                    <td>{{ reservation.tableId.tableNo}}</td>
+                                    <td>{{ reservation.bookingInTime }}</td>
+                                    <td>{{ reservation.bookingOutTime }}</td>
+
+                                    <td><span class="badge badge-success">booked</span>
+                                        <!-- <i class="fa fa-times-circle" aria-hidden="true"
+                                            (click)="onRefund(user._id)"></i> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

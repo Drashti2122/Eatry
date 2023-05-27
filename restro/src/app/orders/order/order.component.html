@@ -1,0 +1,222 @@
+<div class="overlay-search citrus-theme">
+  <button type="button" class="overlay-close"><i class="pe-7s-close"></i></button>
+  <div class="header-search-content">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-8">
+          <h4 class="search-title">What are you looking for?</h4>
+          <form action="#" method="get" class="searchform">
+            <div class="input-group">
+              <input type="text" class="form-controller" placeholder="Your seach item here" />
+              <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                  <button type="submit" class="btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <h5 class="search-footer-title">
+            Press <span>enter</span> to confirm search term
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="restaurant-banner overlay-bg pd-t-175-b-90"
+  style="background-image: url(assets/images/restaurant/banner/banner-2.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="breadcrumbs citrus-theme text-center color-white">
+          <span class="first-item">
+            <a href="index.html">Home</a>
+          </span>
+          <span class="separator"><i class="fa fa-angle-right"></i></span>
+          <span class="middle-item">
+            <a href="#">Product</a>
+          </span>
+          <span class="separator"><i class="fa fa-angle-right"></i></span>
+          <span class="last-item">Cart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="list-of-blog blog-single-page pd-tb-90" *ngIf="getAllOrders">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <article class="page">
+          <div class="wooshop">
+
+            <div class="row">
+              <div class="col-lg-9">
+                <table class="shop_table cart">
+                  <thead>
+                    <tr>
+                      <th class="product-remove">&nbsp;</th>
+                      <th class="product-thumbnail">&nbsp;</th>
+                      <th class="product-name">Product</th>
+                      <th class="product-price">Price</th>
+                      <th class="product-quantity">Quantity</th>
+                      <th class="product-subtotal">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let orders of getAllOrders;">
+                    <tr class="cart_item">
+                      <td class="product-remove">
+                        <a title="Remove this item" class="remove">×</a>
+                      </td>
+                      <td class=" product-thumb">
+                        <a>
+                          <figure class="product-thumb">
+                            <img src={{orders.itemId.itemPicture}} alt="" style="height:100px;width:100px;" />
+                            <!-- {{orders.itemId?.itemPicture}} -->
+                          </figure>
+                        </a>
+                      </td>
+                      <td class="product-name" data-title="Product">
+                        <a href="#"><span class="product-title">{{orders.itemId.itemName}}</span></a>
+                        <span class="product-cat">Vegetarian</span>
+
+                      </td>
+                      <td class="product-price" data-title="Price">
+                        <span class="amount"><i class="fa fa-inr"
+                            aria-hidden="true"></i>{{orders.itemId.itemPrice}}</span>
+                      </td>
+                      <td class="product-quantity" data-title="Quantity">
+                        <div class="quantity buttons_added">
+                          <input type="number" size="4" class="input-text qty text" title="Qty"
+                            value={{orders.quantity}} disabled>
+                        </div>
+                      </td>
+                      <td class="product-subtotal" data-title="Total">
+                        <span class="amount"><i class="fa fa-inr"
+                            aria-hidden="true"></i>{{orders.totalPrice}}</span><br>
+                        <span class="product-cat" *ngIf="orders.payment_status=='completed'">Paid</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <table class="shop_table cart">
+                    <tr class="cart_item_update">
+                      <td class="actions" colspan="7">
+                        <div class="coupon pull-left">
+                          <input type="text" placeholder="Coupon code" value="" id="coupon_code" class="input-text"
+                            name="coupon_code">
+                          <input type="submit" value="Apply" name="apply_coupon" class="button">
+                        </div>
+                        <div class="cart-update pull-right">
+                          <input type="submit" value="Update Cart" name="update_cart" class="button">
+                        </div>
+                      </td>
+                    </tr>
+                  </table> -->
+              </div>
+              <div class="col-lg-3">
+                <div class="cart_totals calculated_shipping">
+                  <h2>Cart totals</h2>
+                  <form>
+                    <table cellspacing="0" class="shop_table shop_table_responsive">
+                      <tbody>
+                        <tr class="cart-subtotal">
+                          <th>Subtotal</th>
+                          <td data-title="Subtotal">
+                            <span class="woocommerce-Price-amount amount"><span
+                                class="woocommerce-Price-currencySymbol"></span><i class="fa fa-inr"
+                                aria-hidden="true"></i>{{allOverPendingTotal}}</span>
+                          </td>
+                        </tr>
+                        <tr class="cart-subtotal">
+                          <th>Gst 10%</th>
+                          <td data-title="Subtotal">
+                            <span class="woocommerce-Price-amount amount"><span
+                                class="woocommerce-Price-currencySymbol"></span><i class="fa fa-inr"
+                                aria-hidden="true"></i>{{gst}}</span>
+                          </td>
+                        </tr>
+                        <tr class="order-total">
+                          <th>Total</th>
+                          <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
+                                  class="woocommerce-Price-currencySymbol"></span><i class="fa fa-inr"
+                                  aria-hidden="true"></i>{{totalWithGst}}</span></strong>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+
+                  <div class="wc-proceed-to-checkout">
+                    <a class="checkout-button button alt wc-forward" (click)="pay(totalWithGst)"
+                      *ngIf="!checkOutStatus">checkout
+                      <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checkout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    </a>
+                    <a class="checkout-button button alt wc-forward" (click)="onBillPdf()" *ngIf="!checkOutStatus">Bill
+                      Pdf
+                      <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bill Pdf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    </a>
+                  </div>
+                  <div class="col-md-12 text-center pt-">
+                    <h4 *ngIf="allOverCompleteTotal>0">Remaining total:{{totalWithGst}}</h4>
+                    <h4 *ngIf="allOverCompleteTotal>0">All over total:{{totalWithGst1+totalWithGst}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-of-blog blog-single-page pd-tb-90" *ngIf="!getAllOrders">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>No order Placed</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div class="card-element" #cardElement></div>
+    <div class="card-errors" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+
+  <button type="submit" [disabled]="!paymentForm.valid">Submit Payment</button>
+</form> -->
+<!-- <section>
+  <div class="product">
+    <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+    <div class="description">
+      <h3>Stubborn Attachments</h3>
+      <h5>$20.00</h5>
+    </div>
+  </div>
+  <form action="/create-checkout-session" method="POST">
+    <button type="submit" id="checkout-button">Checkout</button>
+  </form>
+</section> -->
+<!-- <div class="container mt-5">
+  <h2>Stripe Checkout</h2>
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <button (click)="pay(totalWithGst)" class="btn btn-primary btn-block">Pay {{totalWithGst}}</button>
+    </div>
+  </div>
+  <p class="mt-5">
+    Try it out using the test card number <b>4242 4242 4242 4242</b>, a random three-digit CVC number, any expiration
+    date in the future, and a random five-digit U.S. ZIP code.
+  </p>
+</div> -->

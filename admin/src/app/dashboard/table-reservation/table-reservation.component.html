@@ -1,0 +1,70 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width:108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Table Reservation</h3>
+    </div>
+    <!-- <form> -->
+    <div class="form-group col-xs-6 m-5" style="display:inline-block;">
+      <label for="exampleInputName1">Search Tablename</label>
+      <input type="text" class="form-control" placeholder="Search Table" [(ngModel)]="filterObj.searchTName"
+        id="searchInputTableName">
+    </div>
+    <div class="form-group col-xs-6 m-5" style="display:inline-block;">
+      <label for="exampleInputName1">Search Date</label>
+      <input type="date" class="form-control" placeholder="Search Date" [(ngModel)]="filterObj.searchDate"
+        id="searchInputTableDate">
+    </div>&nbsp;&nbsp;&nbsp;
+    <div class="form-group col-xs-6 m-5" style="display:inline-block;">
+      <select class="form-control" id="searchPageTableStatus" [(ngModel)]="filterObj.pageSize">
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Table Reservation</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>Table No</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Table Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Customer Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Booking Date</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Booked In time</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Booked Out time</h6>
+                    </b></th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="let tabReservation of getAllTableReservation | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                <tr>
+                  <td>{{tabReservation.tableId}}</td>
+                  <td>{{tabReservation.tableName}}</td>
+                  <td>{{tabReservation.customerId}}</td>
+                  <td>{{tabReservation.bookingDate | date:'yyyy-MM-dd'}}</td>
+                  <td>{{tabReservation.bookingInTime}}</td>
+                  <td>{{tabReservation.bookingOutTime}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

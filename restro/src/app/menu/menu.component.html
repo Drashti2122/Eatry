@@ -1,0 +1,141 @@
+<div class="overlay-search citrus-theme">
+  <button type="button" class="overlay-close"><i class="pe-7s-close"></i></button>
+  <div class="header-search-content">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-8">
+          <h4 class="search-title">What are you looking for?</h4>
+          <form action="#" method="get" class="searchform">
+            <div class="input-group">
+              <input type="text" class="form-controller" placeholder="Your seach item here" />
+              <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                  <button type="submit" class="btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <h5 class="search-footer-title">
+            Press <span>enter</span> to confirm search term
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="restaurant-banner overlay-bg pd-t-235-b-175"
+  style="background-image: url(assets/images/restaurant/banner/banner-1.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="restaurant-banner-title color-white text-center">Our Menu</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div *ngFor="let category of getAllItem[0].categories">
+    {{ category.categoryName }}
+    <ul>
+      <li *ngFor="let subCategory of category.subCategories">
+        {{ subCategory.subCategoryName }}
+        <ul>
+          <li *ngFor="let item of subCategory.items">
+            {{ item.itemName }} - {{ item.itemPrice }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div> -->
+<section class="our-menu-block pd-tb-90" *ngFor="let category of getAllItem?.[0].categories">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-center full-content mrb-60">
+        <h2 class="section-title no-border"> {{ category.categoryName }}</h2>
+        <div class="resturent-title-border">
+          <i class="lit lit-restaurent-knife"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngFor="let subCategory of category.subCategories">
+      <div class="col-md-6 text-center full-content mrb-60">
+        <h4 class="no-border">{{ subCategory.subCategoryName }}</h4>
+      </div>
+      <div class="col-md-12">
+        <div class="regular-menu">
+          <div class="row" style="display:flex">
+            <div class="col-lg-6" *ngFor="let item of subCategory.items">
+              <div class="restu-menu-item menu-v2">
+                <form [formGroup]="orderForm" (ngSubmit)="onOrder(item._id,item.itemPrice)">
+                  <figure class="menu-thumbnail">
+                    <img src={{item.itemPicture}} alt="menu" style="height:120px; border-style: solid;
+                      border-width: 2px;border-color: rgb(211 211 211);border-radius: 5px;" />
+                  </figure>
+                  <div class="menu-desc row align-items-center">
+                    <div class="left-part col-6 col-md-6 col-xl-7">
+                      <h2 class="menu-title"><a>{{ item.itemName }}</a></h2>
+                      <div class="menu-meta">
+                        <input type="number" class="form-control" min="1" style="width:30%;" [value]=1
+                          formControlName="quantity">
+                        <!-- <input type="hidden" formControlName="itemPrice" > -->
+                        <div class="menu-cat" *ngIf="item.foodType=='Veg'">
+                          <a href="#">Vegetarian</a>
+                        </div>
+                        <div class="menu-cats" *ngIf="item.foodType=='nonVeg'">
+                          <a href="#">Non-Vegetarian</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="right-part col-6 col-md-6 col-xl-5">
+                      <div class="menu-price">
+                        <div class="price"><span><img src="../../../assets/images/icon/rupee.png"
+                              style="height:20px;width:20px;"></span>{{item.itemPrice}}</div>
+                        <div class="order-block" style="display: flex;">
+                          <a><button type="submit" class="order-btn order-hover"
+                              [disabled]=rolesState>Order</button></a>
+                          <!-- <div id="likeButton"
+                            style="border-color: black;border-radius: 100%;width:10px;height:10px;padding-left:10px;padding-top:5px;">
+                            <i class="pe-7s-like" style="font-size: 29px;" ></i>
+                          </div> -->
+                          <!-- <div id="likeButton" (click)="toggleLike()" [class.filled]="isLiked">
+                            <i class="fa fa-solid fa-heart lcolor"
+                              style="font-size:30px;padding-left:10px;padding-top:5px;"></i>
+                          </div> -->
+                          <div class="like-container" (click)="toggleLike(item,item._id)" [class.filled]="item.isLiked">
+                            <i class="fa fa-solid fa-heart lcolor"
+                              style="font-size:30px;padding-left:10px;padding-top:5px;"></i>
+                          </div>
+                          <!-- <a class="wishlist-btn"><i class="pe-7s-like"></i></a> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- <hr> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <hr> -->
+</section>
+
+<script>
+  $(document).ready(function () {
+    alert("hello")
+
+    const likeIcon = document.getElementById('likeIcon');
+
+    likeIcon.addEventListener('click', function () {
+      likeIcon.classList.add('filled');
+    });
+  });
+
+
+</script>

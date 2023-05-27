@@ -1,0 +1,230 @@
+<div class="hamburger-block citrus-theme">
+  <div class="overlaybg"></div>
+  <div class="hamburger-block-container expand-block">
+    <div class="hamburger-search-form">
+      <form method="get" class="searchform">
+        <div class="input-group">
+          <!-- <input type="text" class="form-controller" placeholder="Your search item here" /> -->
+          <div class="input-group-btn">
+            <div class="btn-group" role="group">
+              <button type="submit" class="btn btn-primary">
+                <!-- <span class="fa fa-search" aria-hidden="true"></span> -->
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="close-menu">
+      <i class="pe-7s-close"></i>
+    </div>
+
+    <div class="main-mobile-menu" id="mobile-main-menu"></div>
+
+    <div class="hamburger-wrapper">
+
+      <div class="hamburger-content">
+        <ul class="hamburger-mainmenu">
+          <!-- <li>
+            <a href="#">My Profile<span class="description">6 Check Profile</span></a>
+          </li>
+          <li>
+            <a href="#">Freebies<span class="description">97543 Boards</span></a>
+          </li>
+          <li>
+            <a href="#">Facebook Page<span class="description">753 Shared Documents</span></a>
+          </li>
+          <li>
+            <a href="#">Dribble<span class="description">74 Contacts</span></a>
+          </li>
+          <li>
+            <a href="#">Behance<span class="description">500 Follower</span></a>
+          </li> -->
+          <li>
+            <!-- <a href="#">Deals<span class="description">What we offer in deals</span></a> -->
+            <ul class="sub-menu">
+              <li>
+                <a href="blog.html">Blog Page</a>
+              </li>
+              <li>
+                <a href="blog-single.html">Blog Sinlge</a>
+              </li>
+              <li>
+                <a href="404.html">404</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hamburger-widget-area">
+        <div class="widget">
+          <h2 class="widget-title">About Us</h2>
+          <div class="widget-content">
+            <p>We Cater your Needs. Elegant style of catering for your style and budget.</p>
+            <!-- <a href="#" class="btn purchase-btn">Purchase Our Theme</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<header class="site-header bg-bl-transparent no-border sticky-header citrus-theme" id="site-header">
+  <div class="container clearfix">
+    <div class="row">
+      <div class="col-5 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+        <div class="header-left">
+          <div class="site-logo">
+            <a>
+              <!-- <img src="assets/images/resturent-logo.png" alt="site-logo" /> -->
+              <i class="lit lit-restaurent-knife" style="color:#94b800"></i>
+              <span style="color:white;font-size:30px;">Eatry</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="d-none d-xl-block col-md-8">
+        <div class="header-middle">
+          <nav class="navigation">
+
+            <div class="menu-wrapper">
+              <div class="menu-content">
+                <ul class="mainmenu">
+                  <li>
+                    <a href="#">Home</a>
+                  </li>
+                  <li>
+                    <a routerLink="menu">Menu</a>
+                  </li>
+                  <li>
+                    <!-- <a routerLink="orders" *ngIf="!rolesState && orderExists>0">orders</a> -->
+                    <a routerLink="orders" *ngIf="!rolesState || orderExists">orders</a>
+                  </li>
+                  <li *ngIf="!userExists && rolesState">
+                    <a id="#login-register" data-toggle="modal" data-target="#login-register">BookTable</a>
+                  </li>
+                  <li *ngIf="userExists && rolesState">
+                    <a routerLink="book-table">BookTable</a>
+                  </li>
+                  <li>
+                    <a routerLink="about">About</a>
+                  </li>
+                  <!-- <li>
+                    <a (onClick)="onLogout()">Logout</a>
+                  </li> -->
+                  <!-- <li><a>Sign In</a></li> -->
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class=" col-7 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+        <div class="header-right">
+          <ul class="right-menu">
+
+            <!-- <li><a id="#" class="search-extend"><i class="pe-7s-search"></i></a></li> -->
+            <li><a id="#login-register" class="user-registration" data-toggle="modal" data-target="#login-register"><i
+                  class="pe-7s-users" *ngIf="rolesState"></i></a></li>
+            <li><a id="#" class="hamburger-menu"><i class="icon-arrows-hamburger-2"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="login-register" class="login-register-modal citrus-theme modal fade">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="pe-7s-close"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="bsm-tabs">
+          <li class="bsm-tab"><a class="active" href="#login">Login</a></li>
+          <li class="bsm-tab"><a href="#register">Register</a></li>
+        </ul>
+        <div id="login" class="bsm-tab-content">
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+            <div class="bsm-input-field">
+              <input id="login_user_name" type="email" class="validate" formControlName="loginEmail" required>
+              <label for="login_user_name">User Name</label>
+              <span *ngIf="loginEmail && loginEmail.invalid && loginEmail.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="loginEmail?.errors?.['required']">*Email is required</span>
+              </span>
+            </div>
+            <div class="bsm-input-field">
+              <input id="login_passwords" type="password" class="validate" formControlName="loginPassword" required>
+              <label for="login_passwords">Passwords</label>
+              <span *ngIf="loginPassword && loginPassword.invalid && loginPassword.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="loginPassword?.errors?.['required']">*Password is
+                  required</span>
+              </span>
+            </div>
+            <div class="remember-field">
+              <!-- <input type="checkbox" id="remember" />
+              <label for="remember">Remember Me</label> -->
+            </div>
+
+            <button class="bsm-btn waves-effect moody-blue-bg " type="submit" name="action"
+              [disabled]="loginForm.invalid">Submit</button>
+          </form><br>
+          <a class="text-start p-3" style="color:white;text-decoration: underline;" routerLink="forgot">forgot
+            password?</a>
+        </div>
+        <div id="register" class="bsm-tab-content">
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="register-form">
+            <div class="bsm-input-field">
+              <input id="full_name" type="text" class="validate" formControlName="resName" required>
+              <label for="full_name">Enter Name</label>
+              <span *ngIf="resName && resName.invalid && resName.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="resName?.errors?.['required']">*Username is required</span>
+              </span>
+            </div>
+            <div class="bsm-input-field">
+              <input id="user_name" type="email" class="validate" formControlName="resEmail" required>
+              <label for="user_name">Enter EmailID</label>
+              <span *ngIf="resEmail && resEmail.invalid && resEmail.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="resEmail?.errors?.['required']">*Email is required</span>
+              </span>
+            </div>
+            <div class="bsm-input-field">
+              <input type="password" class="validate" formControlName="resPassword" required>
+              <label for="passwords">Enter Password</label>
+              <span *ngIf="resPassword && resPassword.invalid && resPassword.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="resPassword?.errors?.['required']">*Password is
+                  required</span>
+                <span class="text-light text-center" *ngIf="resPassword?.errors?.['pattern']">Minimum eight characters,
+                  at least one letter, one number and one special character and not allow space between character</span>
+              </span>
+            </div>
+            <div class="bsm-input-field">
+              <input type="password" class="validate" formControlName="resCPassword" required>
+              <label for="passwords">Enter Confirm Password</label>
+              <span *ngIf="resCPassword && resCPassword.invalid && resCPassword.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="resCPassword?.errors?.['required']">*Password is
+                  required</span>
+              </span>
+            </div>
+            <div class="bsm-input-field">
+              <input id="cno" type="number" class="validate" formControlName="resCNo" required>
+              <label for="cno">Enter ContactNo</label>
+              <span *ngIf="resCNo && resCNo.invalid && resCNo.touched" class="text-end">
+                <span class="text-light text-end" *ngIf="resCNo?.errors?.['required']">*Password is
+                  required</span>
+                <span class="text-light text-center" *ngIf="resCNo?.errors?.['pattern']">Enter valid contact
+                  number</span>
+              </span><br>
+            </div>
+            <button class="bsm-btn waves-effect moody-blue-bg" type="submit" name="action"
+              [disabled]="registerForm.invalid">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

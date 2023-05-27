@@ -1,0 +1,81 @@
+<div class="overlay-search citrus-theme">
+  <button type="button" class="overlay-close"><i class="pe-7s-close"></i></button>
+  <div class="header-search-content">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-8">
+          <h4 class="search-title">What are you looking for?</h4>
+          <form action="#" method="get" class="searchform">
+            <div class="input-group">
+              <input type="text" class="form-controller" placeholder="Your seach item here" />
+              <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                  <button type="submit" class="btn btn-primary">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <h5 class="search-footer-title">
+            Press <span>enter</span> to confirm search term
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="restaurant-banner overlay-bg pd-t-175-b-90"
+  style="background-image: url(assets/images/restaurant/banner/banner-2.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="breadcrumbs citrus-theme text-center color-white">
+          <span class="first-item">
+            <a routerLink="/home">Home</a>
+          </span>
+          <span class="separator"><i class="fa fa-angle-right"></i></span>
+          <span class="last-item">Forgot Password</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-content pd-tb-90">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 text-center full-content">
+        <h2 class="section-title no-border">Forgot Password</h2>
+        <p class="sub-section-title v-2">Email valid only for 10 minutes.after you need to resend it.</p>
+        <div class="mrb-45"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="contact-form-area">
+          <form [formGroup]="forgotForm" (ngSubmit)="onForgot()" class="contact-form round no-bg citrus-theme">
+            <div class="row">
+              <div class="clearfix"></div>
+              <div class="col-md-12">
+                <input id="email" type="email" class="validate" formControlName="forgotEmail"
+                  placeholder="Enter EmaiiID" required>
+                <span *ngIf="forgotEmail && forgotEmail.invalid && forgotEmail.touched" class="text-end">
+                  <span class="text-dark text-end text font-weight-bold  px-4"
+                    *ngIf="forgotEmail?.errors?.['required']">*Email is required</span>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-12 mrt-15">
+                <button class="btn-contact" type="submit" type="submit" [disabled]="forgotForm.invalid">Forgot
+                  password</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

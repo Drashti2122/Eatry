@@ -1,0 +1,65 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width:108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Bill Status</h3>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">About payment status</h4>
+            <div class="row start-end" style="display:flex">
+              <div class="col-md-5"></div>
+              <div class="col-md-6">
+                <input id="searchInputBill" type="text" class="form-control" placeholder="Search"
+                  [(ngModel)]="filterObj.searchName">
+              </div>
+              <div class="col-md-1">
+                <select class="form-control" id="searchPageBill" [(ngModel)]="filterObj.pageSize">
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div><br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>Group Name</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Table No</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Payment</h6>
+                    </b></th>
+                  <th><b>
+                      <h6>Status</h6>
+                    </b></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let bill of getAllBillData | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                <tr>
+                  <!-- <td>{{bill.otpUserId}}</td>
+                  <td>{{bill.tableId}}</td> -->
+                  <td>{{bill.groupName}}</td>
+                  <td>{{bill.tableName}}</td>
+                  <td><i class="mdi mdi-currency-inr"></i>{{bill.total}}</td>
+                  <td><span class="badge badge-success" *ngIf="bill.status=='complete'">{{bill.status}}</span><span
+                      class="badge badge-warning" *ngIf="bill.status=='pending'"
+                      (click)="onBill(bill._id)">{{bill.status}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)" class="pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

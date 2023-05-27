@@ -1,0 +1,110 @@
+<footer class="site-footer bg-nero">
+  <div class="footer-middle citrus-theme">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="widget">
+            <div class="widget-content">
+              <figure class="widget-thumb">
+                <!-- <img src="assets/images/resturent-logo.png" alt="" /> -->
+                <i class="lit lit-restaurent-knife" style="color:#94b800"></i>
+                <span style="color:white;font-size:30px;">Eatry</span>
+              </figure>
+              <p>The shared meal elevates eating from a mechanical process of fueling the body to a ritual of family and
+                community, from the mere animal biology to an act of culture..</p>
+              <br>
+              <ul class="social-link">
+                <li><a><i class="fa fa-twitter"></i></a></li>
+                <li><a><i class="fa fa-feed"></i></a></li>
+                <li><a><i class="fa fa-instagram"></i></a></li>
+                <li><a><i class="fa fa-facebook"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <!-- <div class="widget widget_nav_menu">
+            <h2 class="widget-title">Help full links</h2>
+            <div class="widget-content">
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">FAQ 1</a></li>
+                <li><a href="#">Career</a></li>
+                <li><a href="#">Latest News</a></li>
+                <li><a href="#">Phones</a></li>
+              </ul>
+            </div>
+          </div> -->
+        </div>
+        <div class="col-md-2">
+          <div class="widget widget_nav_menu">
+            <h2 class="widget-title">About Us</h2>
+            <div class="widget-content">
+              <ul>
+                <li><a>About Me</a></li>
+                <li><a>Blog</a></li>
+                <li><a>Book Table</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="widget">
+            <h2 class="widget-title">Contact Us</h2>
+            <div class="widget-content">
+              <ul>
+                <li><i class="fa fa-map-marker"></i><a>Luxuria Trade Hub, Dumas road surat 395007</a>
+                </li>
+                <li id="contact-number"><i class="fa fa-phone"></i><a>+91 85045 52045</a></li>
+                <li><i class="fa fa-envelope"></i><a class="__cf_email__"
+                    data-cfemail="3642594442595f4c425e535b534576515b575f5a1855595b">drashtikalathiya44@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom citrus-theme">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="copyright-text">Copyright 2023 <a href="#" class="color-citrus">Eatry</a> All rights
+            Reserved.</p>
+        </div>
+        <div class="col-md-6">
+          <ul class="footer-menu float-right">
+            <!-- <li><a>Map</a></li>
+            <li><a>TortoizThemes</a></li> -->
+            <li><a>Terms and Condition</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  // Get the contact number element
+  const contactNumber = document.getElementById('contact-number');
+
+  // Add a click event listener to the contact number element
+  contactNumber.addEventListener('click', () => {
+    // Create a new textarea element and set its value to the contact number
+    const textarea = document.createElement('textarea');
+    textarea.value = contactNumber.textContent;
+
+    // Append the textarea to the document
+    document.body.appendChild(textarea);
+
+    // Copy the text from the textarea to the clipboard
+    textarea.select();
+    document.execCommand('copy');
+
+    // Remove the textarea from the document
+    document.body.removeChild(textarea);
+
+    // Display a message to the user
+    alert('Contact number copied to clipboard!');
+  });
+</script>

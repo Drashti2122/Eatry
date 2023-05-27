@@ -1,0 +1,78 @@
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color :white;width:108rem;">
+    <div class="page-header">
+      <h3 class="page-title">Manage Category</h3>
+    </div>
+    <div class="row">
+
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add Category</h4>
+            <form [formGroup]="categoryForm" (ngSubmit)="onCategory()">
+              <div class="form-group col-xs-12">
+                <!-- <label for="exampleInputName1">Category Name</label> -->
+                <input type="text" class="form-control" placeholder="Category Name" formControlName="categoryName"
+                  required>
+                <div *ngIf="categoryName && categoryName.invalid && categoryName.touched">
+                  <div class="text-danger text-start" *ngIf="categoryName?.errors?.['required']">*Category Name is
+                    required
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn mr-2 btn-color">{{editState?'Edit':'Add'}}</button>
+              <!-- <button class="btn btn-light">Cancel</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Get Category</h4>
+            <div class="row start-end" style="display:flex">
+              <div class="col-md-5"></div>
+              <div class="col-md-6">
+                <input id="searchInputCategory" type="text" class="form-control" placeholder="Search"
+                  [(ngModel)]="filterObj.searchName">
+              </div>
+              <div class="col-md-1">
+                <select class="form-control" id="searchPageCategory" [(ngModel)]="filterObj.pageSize">
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+
+            <table class="table" id="example">
+              <thead>
+                <tr>
+                  <th><b>
+                      <h6>Category Name</h6>
+                    </b></th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="let category of getAllcategory | paginate: { itemsPerPage: filterObj.pageSize, currentPage: p,totalItems: count}">
+                <tr>
+                  <td>{{category.categoryName}}</td>
+                  <td><a (click)=" onEditCategory(category._id)"><i class="mdi mdi-pencil menu-icon fs-4"></i></a>
+                  </td>
+                  <td><a (click)="onDelCategory(category._id)"><i class="mdi mdi-close-circle menu-icon fs-4"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)" class="pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
